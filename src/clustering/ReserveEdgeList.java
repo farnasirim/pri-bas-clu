@@ -1,5 +1,5 @@
 package clustering;
 
-public class ReserveEdgeList {
+public class ReserveEdgeList extends AbstractEdgeList{
 
 }
