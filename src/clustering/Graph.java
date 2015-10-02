@@ -8,7 +8,7 @@ import java.util.HashMap;
 public class Graph<T>{
 	private HashMap<T , Integer> hashedId ;
 	private HashMap<Integer , T> reverseHash ;
-		
+	private PriorityBasedEdgeManager edgeManager ;
 	private IncrementalGraph graphToAdd ;
 	
 	Integer nextVertexId  ;
@@ -17,6 +17,7 @@ public class Graph<T>{
 		hashedId = new HashMap<>() ;
 		reverseHash = new HashMap<>() ;
 		graphToAdd = new IncrementalGraph() ;
+		edgeManager = new PriorityBasedEdgeManager();
 		nextVertexId  = 1;
 	}
 	
@@ -31,19 +32,23 @@ public class Graph<T>{
 		}
 	}
 	
-	public void addEdge(T a  , T b){
+	public void setCurrentTimestamp(int t ){
+		edgeManager.setCurrentTimestamp(t) ;
+	}
+	
+	public void addEdge(T a  , T b, Double w){
 		checkVertice(a);
 		checkVertice(b);
-		graphToAdd.add(new Pair <Integer , Integer> (getLabel(a) , getLabel(b)));
+		graphToAdd.add(new WeightedEdge(getLabel(a) , getLabel(b) ,w));
 	}
 	
 	private void clear(){
 		graphToAdd.clear(); 
 	}
 	
-	public void evaluate() throws NotImplementedYetException{
+	public void evaluate(){
+		edgeManager.evaluate(graphToAdd);
 		clear() ;
-		throw new NotImplementedYetException() ;
 	}
 	
 }

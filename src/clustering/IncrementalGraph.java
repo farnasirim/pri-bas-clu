@@ -3,17 +3,17 @@ package clustering;
 import java.util.ArrayList;
 
 public class IncrementalGraph {
-	private ArrayList<Pair <Integer , Integer> > al ;
+	private ArrayList<WeightedEdge> al ;
 	IncrementalGraph(){
 		al = new ArrayList<>() ;
 	}
 	
-	public ArrayList<Pair <Integer ,Integer>> getList(){
+	public ArrayList<WeightedEdge> getList(){
 		return al ;
 	}
 	
-	public void add(Pair <Integer ,Integer> p){
-		al.add(p);
+	public void add(WeightedEdge e){
+		al.add(e);
 	}
 	
 	public void clear(){
