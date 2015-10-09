@@ -11,6 +11,8 @@ public class GeneralLimitedSizeEdgeList {
 
 	public GeneralLimitedSizeEdgeList(int sz) {
 		maxSize = sz;
+		pairToEdgeMap = new HashMap<>() ;
+		sortedSetOfEdges = new TreeSet<WeightedEdge>(new WeightedEdgeWeightComparator()) ;
 	}
 
 	public WeightedEdge findEdge(WeightedEdge e){

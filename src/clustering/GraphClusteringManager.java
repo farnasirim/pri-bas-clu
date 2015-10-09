@@ -1,6 +1,8 @@
 package clustering;
 
+import java.io.ObjectInputStream.GetField;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class GraphClusteringManager {
 	private PriorityBasedEdgeManager edgeManager;
@@ -53,6 +55,7 @@ public class GraphClusteringManager {
 		if (!nodeMap.containsKey(v)) {
 			nodeMap.put(v, new Node(v, new Cluster(
 					help.Constants.Parameters.CLUSTER_SIZE)));
+			nodeMap.get(v).registerInCluster();
 		}
 	}
 
@@ -60,5 +63,17 @@ public class GraphClusteringManager {
 		checkNode(v);
 		return nodeMap.get(v);
 	}
-
+	
+	public <T> GraphRepresentation<T> getRepresentation(HashMap<Integer , T> map){
+		GraphRepresentation<T> ret = new GraphRepresentation<>();
+		HashSet<Integer> done  = new HashSet<>();
+		for(Integer num : nodeMap.keySet()){
+			if(!done.contains(num)){
+				done.add(num);
+				ret.add(nodeMap.get(num).getAssociatedCluster().getRepresentation(map , done));
+			}
+		}
+		return ret ;
+	}
+	
 }

@@ -31,4 +31,8 @@ public class Node {
 		associatedCluster = cl ;
 	}
 	
+	public void registerInCluster(){
+		associatedCluster.addNode(this);
+	}
+	
 }

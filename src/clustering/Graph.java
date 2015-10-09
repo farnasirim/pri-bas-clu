@@ -13,7 +13,7 @@ public class Graph<T>{
 	
 	Integer nextVertexId  ;
 	
-	Graph(){
+	public Graph(){
 		hashedId = new HashMap<>() ;
 		reverseHash = new HashMap<>() ;
 		graphToAdd = new IncrementalGraph() ;
@@ -49,6 +49,10 @@ public class Graph<T>{
 	public void evaluate(){
 		edgeManager.evaluate(graphToAdd);
 		clear() ;
+	}
+
+	public GraphRepresentation<T> getRepresentation(){
+		return edgeManager.getRepresentation(reverseHash) ;
 	}
 	
 }

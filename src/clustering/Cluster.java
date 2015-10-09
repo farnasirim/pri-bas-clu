@@ -1,7 +1,9 @@
 package clustering;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.TreeSet;
 
 public class Cluster {
@@ -13,10 +15,14 @@ public class Cluster {
 	public Cluster(int sz) {
 		maxClusterSize = sz; 
 		sortedEdgeList = new TreeSet<>(new WeightedEdgeWeightComparator());
+		nodesInCluster = new HashMap<>();
 	}
 	
 	public void addEdge(WeightedEdge e){
+//		System.out.println(e);
+//		System.out.println("size bef : " + sortedEdgeList.size());
 		sortedEdgeList.add(e);
+//		System.out.println("size aft : " + sortedEdgeList.size());
 	}
 	
 	public WeightedEdge getLowestEdge(){
@@ -78,6 +84,22 @@ public class Cluster {
 	public void reset(){
 		sortedEdgeList.clear();
 		nodesInCluster.clear();
+	}
+	
+	public <T> ClusterRepresentation<T> getRepresentation(HashMap <Integer , T> map , HashSet<Integer> done){
+		ClusterRepresentation<T> ret= new ClusterRepresentation<>();
+		for(Integer nd : nodesInCluster.keySet()){
+			ret.addNode(map.get(nd));
+			done.add(nd);
+		}
+		ArrayList<EdgeRepresentation<T>> tmp = new ArrayList<>() ;
+		for(WeightedEdge e : sortedEdgeList){
+			tmp.add(new EdgeRepresentation<T>(map.get(e.first), map.get(e.second), e.weight, e.meanOfInteractions));
+		}
+		for(int i = tmp.size() - 1 ; i>= 0 ; i --){
+			ret.addEdge(tmp.get(i));
+		}
+		return ret ;
 	}
 	
 }

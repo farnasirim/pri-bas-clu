@@ -1,5 +1,7 @@
 package clustering;
 
+import help.Constants;
+
 import java.util.HashMap;
 
 public class PriorityBasedEdgeManager {
@@ -43,10 +45,12 @@ public class PriorityBasedEdgeManager {
 			WeightedEdge previous = mainList.findEdge(e).getClone();
 			mainList.deleteEdge(e);
 			
-			// update weight
-			WeightedEdge updated= null ; // ...
-			// update weight
-			
+			WeightedEdge updated = new WeightedEdge(e.first, e.second, previous.weight , previous.meanOfInteractions);
+			updated.meanOfInteractions = 
+					Constants.Formulas.meanOfIntrac(getCurrentTimestamp(), e.weight, updated.meanOfInteractions);
+			updated.weight = 
+					Constants.Formulas.calWeight(updated.weight, getCurrentTimestamp(), e.weight, updated.meanOfInteractions);
+
 			mainList.putEdge(updated);
 			updateEdgeInCluster(previous , updated);
 		}
@@ -54,17 +58,21 @@ public class PriorityBasedEdgeManager {
 			WeightedEdge previous = reserveList.findEdge(e).getClone();
 			reserveList.deleteEdge(e);
 			
-			//update weight
-			WeightedEdge updated= null ; // ...
-			//update weight
+			WeightedEdge updated = new WeightedEdge(e.first, e.second, previous.weight , previous.meanOfInteractions);
+			updated.meanOfInteractions = 
+					Constants.Formulas.meanOfIntrac(getCurrentTimestamp(), e.weight, updated.meanOfInteractions);
+			updated.weight = 
+					Constants.Formulas.calWeight(updated.weight, getCurrentTimestamp(), e.weight, updated.meanOfInteractions);
 			
 			mainList.putEdge(updated);
 			edgeArrival(updated);
 		}
 		else{
-			// initialize weight
-			WeightedEdge edge = null ; // ... 
-			// initialize weight
+			WeightedEdge edge = new WeightedEdge(e.first, e.second, 0.0 , 0.0);
+			edge.meanOfInteractions = 
+					Constants.Formulas.meanOfIntrac(getCurrentTimestamp(), e.weight, edge.meanOfInteractions);
+			edge.weight = 
+					Constants.Formulas.calWeight(edge.weight, getCurrentTimestamp(), e.weight, edge.meanOfInteractions);
 
 			mainList.putEdge(edge);
 			edgeArrival(edge);
@@ -105,6 +113,14 @@ public class PriorityBasedEdgeManager {
 			handlePriorityLists();
 		}
 		currentTime++ ;
+	}
+
+	public GraphClusteringManager getGraphManager(){
+		return graphManager;
+	}
+	
+	public <T> GraphRepresentation<T> getRepresentation(HashMap<Integer, T> map) {
+		return getGraphManager().getRepresentation(map);
 	}
 	
 }

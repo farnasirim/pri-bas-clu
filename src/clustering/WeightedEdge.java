@@ -5,6 +5,13 @@ import help.InvalidCallException;
 public class WeightedEdge {
 	public Integer first, second ;
 	public Double weight ;
+	public Double meanOfInteractions ;
+	
+	@Override
+	public String toString() {
+		return first + " " + second + " "  + weight +  " " + meanOfInteractions ;
+	}
+	
 	WeightedEdge(Integer a , Integer b , Double w){
 		first = a ;
 		second = b; 
@@ -14,6 +21,12 @@ public class WeightedEdge {
 			first = tmp ;
 		}
 		weight = w ;
+		meanOfInteractions = 0.0 ;
+	}
+	
+	public WeightedEdge(Integer a , Integer b , Double w , Double mean){
+		this(a , b, w);
+		meanOfInteractions = mean ;
 	}
 	
 	@Override
@@ -43,6 +56,6 @@ public class WeightedEdge {
 		return super.equals(obj1);
 	}
 	public WeightedEdge getClone(){
-		return new WeightedEdge(first , second, weight);
+		return new WeightedEdge(first , second, weight,meanOfInteractions);
 	}
 }
