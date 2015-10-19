@@ -13,7 +13,7 @@ public class PriorityBasedEdgeManager {
 	private int currentTime ;
 
 	public PriorityBasedEdgeManager() {
-		currentTime = 0 ;
+		currentTime = 1	 ;
 		mainList = new GeneralLimitedSizeEdgeList(help.Constants.Parameters.MAIN_PRIORITY_LIST_SIZE);
 		reserveList = new GeneralLimitedSizeEdgeList(help.Constants.Parameters.RESERVE_PRIORITY_LIST_SIZE);
 		graphManager = new GraphClusteringManager(this);
@@ -46,10 +46,10 @@ public class PriorityBasedEdgeManager {
 			mainList.deleteEdge(e);
 			
 			WeightedEdge updated = new WeightedEdge(e.first, e.second, previous.weight , previous.meanOfInteractions);
-			updated.meanOfInteractions = 
-					Constants.Formulas.meanOfIntrac(getCurrentTimestamp(), e.weight, updated.meanOfInteractions);
 			updated.weight = 
 					Constants.Formulas.calWeight(updated.weight, getCurrentTimestamp(), e.weight, updated.meanOfInteractions);
+			updated.meanOfInteractions = 
+					Constants.Formulas.meanOfIntrac(getCurrentTimestamp(), e.weight, updated.meanOfInteractions);
 
 			mainList.putEdge(updated);
 			updateEdgeInCluster(previous , updated);
@@ -59,20 +59,20 @@ public class PriorityBasedEdgeManager {
 			reserveList.deleteEdge(e);
 			
 			WeightedEdge updated = new WeightedEdge(e.first, e.second, previous.weight , previous.meanOfInteractions);
-			updated.meanOfInteractions = 
-					Constants.Formulas.meanOfIntrac(getCurrentTimestamp(), e.weight, updated.meanOfInteractions);
 			updated.weight = 
 					Constants.Formulas.calWeight(updated.weight, getCurrentTimestamp(), e.weight, updated.meanOfInteractions);
+			updated.meanOfInteractions = 
+					Constants.Formulas.meanOfIntrac(getCurrentTimestamp(), e.weight, updated.meanOfInteractions);
 			
 			mainList.putEdge(updated);
 			edgeArrival(updated);
 		}
 		else{
 			WeightedEdge edge = new WeightedEdge(e.first, e.second, 0.0 , 0.0);
-			edge.meanOfInteractions = 
-					Constants.Formulas.meanOfIntrac(getCurrentTimestamp(), e.weight, edge.meanOfInteractions);
 			edge.weight = 
 					Constants.Formulas.calWeight(edge.weight, getCurrentTimestamp(), e.weight, edge.meanOfInteractions);
+			edge.meanOfInteractions = 
+					Constants.Formulas.meanOfIntrac(getCurrentTimestamp(), e.weight, edge.meanOfInteractions);
 
 			mainList.putEdge(edge);
 			edgeArrival(edge);

@@ -20,7 +20,12 @@ public class Constants {
 			
 			// current edge's weight 
 			double deltaBar_CN =( ( n/(n+1))*deltaBar_PN ) + ( ( ( 2*(n-1)*(n) )/( Math.pow((n+1),2)) ) * (Math.pow( (NumOfIntrac - landaBar_PN ),2)) );
-
+//			System.out.println("pastw : " + PastW);
+//			System.out.println("Time  : " + TmSp);
+//			System.out.println("NumInter : " + NumOfIntrac);
+//			System.out.println("Meanof : " + MeanNofInterac);
+//			System.out.println("deltabar : " + deltaBar_CN );
+//			System.out.println();
 			return deltaBar_CN;
 			
 		}
@@ -33,6 +38,11 @@ public class Constants {
 			double landaBarCN ;                       // Mean of interaction in current time-stamp
 			
 			landaBarCN = ( (2/(n+1)) * ( NumOfIntrac - landaBarPN ) ) + landaBarPN;
+//			System.out.println("tm : " + TmSp);
+//			System.out.println("num inter : " + NumOfIntrac);
+//			System.out.println("past mean" + PastMeanOfInterac);
+//			System.out.println("landa bar: " + landaBarCN);
+//			System.out.println();
 			return landaBarCN;
 		}
 		
