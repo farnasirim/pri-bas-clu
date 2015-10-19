@@ -1,0 +1,73 @@
+2
+A B 2
+B C 5
+
+11
+A B 1
+B C 2
+A E 2
+A F 1
+A G 1
+B L 1
+L M 2
+L K 2
+K M 2
+C I 3
+H J 3
+
+16
+A B 3
+B C 1
+A E 0
+A F 1
+A G 3
+E F 2
+B M 4
+B L 3
+B K 3
+L M 0
+L K 0
+K M 0
+C H 2
+C I 1
+C J 2
+H J 0
+
+18
+A B 5
+B C 1
+A E 0
+A F 3
+A G 0
+E F 0
+F G 2
+B M 1
+B L 0
+B K 2
+L M 1
+L K 1
+K M 1
+C H 0
+C I 0
+C J 0
+H J 0
+
+18
+A B 0
+B C 0
+A E 1
+A F 4
+A G 3
+E F 0
+F G 0
+B M 1
+B L 1
+B K 1
+L M 2
+L K 5
+K M 2
+C H 1
+C I 4
+C J 3
+H J 2
+
