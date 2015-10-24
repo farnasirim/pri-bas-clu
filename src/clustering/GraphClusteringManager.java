@@ -45,6 +45,9 @@ public class GraphClusteringManager {
 		Node a = getNode(e.first);
 		Node b = getNode(e.second);
 		a.getAssociatedCluster().addEdge(e);
+//		if(e.first == 5 && e.second == 6){
+//			System.out.println("For " + e + " merging " + a.getNodeId() + " " + b.getNodeId());
+//		}
 		if(a.getAssociatedCluster() != b.getAssociatedCluster()){
 			merge(a , b);
 		}

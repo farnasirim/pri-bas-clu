@@ -43,6 +43,7 @@ public class GeneralLimitedSizeEdgeList {
 			pairToEdgeMap.put(e.first, new HashMap<>());
 		}
 		pairToEdgeMap.get(e.first).put(e.second, e);
+//		System.out.println("putting " + e  + "in ");
 		sortedSetOfEdges.add(e);
 	}
 

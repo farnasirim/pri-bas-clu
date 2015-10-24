@@ -54,5 +54,9 @@ public class Graph<T>{
 	public GraphRepresentation<T> getRepresentation(){
 		return edgeManager.getRepresentation(reverseHash) ;
 	}
+
+	public HashMap<Integer, T> getInverseMap() {
+		return reverseHash;
+	}
 	
 }

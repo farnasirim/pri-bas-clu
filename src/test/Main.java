@@ -28,6 +28,13 @@ public class Main {
 		return new PrintStream(new File(logPrefix + now + ".txt"));
 	}
 	
+	private static <T> void printMap(Graph<T> g){
+		System.out.println();
+		for(Integer key : g.getInverseMap().keySet())
+			System.out.println(key + " " + g.getInverseMap().get(key));
+		
+	}
+	
 	public static void testFunc(){
 		PrintStream printer = System.out; 
 		try {
@@ -49,7 +56,7 @@ public class Main {
 //		Scanner inp = new Scanner(System.in);
 		Scanner inp = null;
 		try {
-			inp = new Scanner(new File("data/datanozero.txt"));
+			inp = new Scanner(new File("data/datanozero2.txt"));
 //			inp = new Scanner(new File("data/debug.txt"));
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
@@ -100,8 +107,9 @@ public class Main {
 			printer.println();
 			printer.println("---------------------------------------------------------------------");
 			printer.println();
-			
+					
 		}
+		printMap(graph);
 		printer.close();
 	}
 	

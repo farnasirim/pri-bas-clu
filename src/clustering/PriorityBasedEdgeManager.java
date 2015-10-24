@@ -42,8 +42,37 @@ public class PriorityBasedEdgeManager {
 		graphManager.deleteEdge(e);
 	}
 	
-	private void handle(WeightedEdge e){
+	private void hardUpdate(WeightedEdge e){
 		if(mainList.hasEdge(e)){
+			WeightedEdge previous = mainList.findEdge(e).getClone();
+			mainList.deleteEdge(e);
+			
+			WeightedEdge updated = new WeightedEdge(e.first, e.second, previous.weight , previous.meanOfInteractions);
+			updated.weight = 
+					Constants.Formulas.calWeight(updated.weight, getCurrentTimestamp(), e.weight, updated.meanOfInteractions);
+			updated.meanOfInteractions = 
+					Constants.Formulas.meanOfIntrac(getCurrentTimestamp(), e.weight, updated.meanOfInteractions);
+			mainList.putEdge(updated);
+			updateEdgeInCluster(previous, updated);
+		}
+		else{ // in reserve
+			WeightedEdge previous = reserveList.findEdge(e).getClone();
+			reserveList.deleteEdge(e);
+			
+			WeightedEdge updated = new WeightedEdge(e.first, e.second, previous.weight , previous.meanOfInteractions);
+			updated.weight = 
+					Constants.Formulas.calWeight(updated.weight, getCurrentTimestamp(), e.weight, updated.meanOfInteractions);
+			updated.meanOfInteractions = 
+					Constants.Formulas.meanOfIntrac(getCurrentTimestamp(), e.weight, updated.meanOfInteractions);
+			
+			reserveList.putEdge(updated);
+		}
+	}
+	
+	private void handle(WeightedEdge e){
+		System.out.println("handling : " + e);
+		if(mainList.hasEdge(e)){
+			System.out.println("in main");
 			WeightedEdge previous = mainList.findEdge(e).getClone();
 			mainList.deleteEdge(e);
 			
@@ -57,6 +86,7 @@ public class PriorityBasedEdgeManager {
 			updateEdgeInCluster(previous , updated);
 		}
 		else if(reserveList.hasEdge(e)){
+			System.out.println("in reserve");
 			WeightedEdge previous = reserveList.findEdge(e).getClone();
 			reserveList.deleteEdge(e);
 			
@@ -70,6 +100,7 @@ public class PriorityBasedEdgeManager {
 			edgeArrival(updated);
 		}
 		else{
+			System.out.println("in nothing");
 			WeightedEdge edge = new WeightedEdge(e.first, e.second, 0.0 , 0.0);
 			edge.weight = 
 					Constants.Formulas.calWeight(edge.weight, getCurrentTimestamp(), e.weight, edge.meanOfInteractions);
@@ -79,6 +110,7 @@ public class PriorityBasedEdgeManager {
 			mainList.putEdge(edge);
 			edgeArrival(edge);
 		}
+		System.out.println();
 	}
 	
 	public void moveEdgeToReserve(WeightedEdge e){
@@ -120,6 +152,7 @@ public class PriorityBasedEdgeManager {
 	}
 	
 	public void evaluate(IncrementalGraph g){
+		System.out.println("time : " + getCurrentTimestamp());
 		HashMap<Integer , HashSet<Integer> > hs = new HashMap<>();
 		for(WeightedEdge e : g.getList()){
 			if(!hs.containsKey(e.first)){
@@ -134,7 +167,7 @@ public class PriorityBasedEdgeManager {
 		for(WeightedEdge e : getEdges()){
 			boolean already = hs.containsKey(e.first) && hs.get(e.first).contains(e.second) ;
 			if(!already){
-				handle(new WeightedEdge(e.first , e.second , 0.0));
+				hardUpdate(new WeightedEdge(e.first , e.second , 0.0));
 			}
 		}
 		currentTime++ ;
