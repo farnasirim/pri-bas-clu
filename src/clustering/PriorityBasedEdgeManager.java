@@ -2,7 +2,9 @@ package clustering;
 
 import help.Constants;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class PriorityBasedEdgeManager {
 	private GeneralLimitedSizeEdgeList mainList ;
@@ -105,12 +107,35 @@ public class PriorityBasedEdgeManager {
 		return currentTime ;
 	}
 	
+	public ArrayList<WeightedEdge> getEdges(){
+		ArrayList<WeightedEdge> ret = new ArrayList<>();
+		
+		for(WeightedEdge e : mainList.getEdges()){
+			ret.add(e);
+		}
+		for(WeightedEdge e: reserveList.getEdges()){
+			ret.add(e);
+		}
+		return ret ;
+	}
+	
 	public void evaluate(IncrementalGraph g){
+		HashMap<Integer , HashSet<Integer> > hs = new HashMap<>();
 		for(WeightedEdge e : g.getList()){
+			if(!hs.containsKey(e.first)){
+				hs.put(e.first, new HashSet<>());
+			}
+			hs.get(e.first).add(e.second);
 			checkNode(e.first);
 			checkNode(e.second);
 			handle(e);
 			handlePriorityLists();
+		}
+		for(WeightedEdge e : getEdges()){
+			boolean already = hs.containsKey(e.first) && hs.get(e.first).contains(e.second) ;
+			if(!already){
+				handle(new WeightedEdge(e.first , e.second , 0.0));
+			}
 		}
 		currentTime++ ;
 	}
@@ -120,7 +145,14 @@ public class PriorityBasedEdgeManager {
 	}
 	
 	public <T> GraphRepresentation<T> getRepresentation(HashMap<Integer, T> map) {
-		return getGraphManager().getRepresentation(map);
+		GraphRepresentation<T> ret = getGraphManager().getRepresentation(map);
+		for(WeightedEdge e : mainList.getEdges()){
+			ret.addToMainList(new EdgeRepresentation<T>(map.get(e.first), map.get(e.second), e.weight, e.meanOfInteractions));
+		}
+		for(WeightedEdge e : reserveList.getEdges()){
+			ret.addToReserveList(new EdgeRepresentation<T>(map.get(e.first), map.get(e.second), e.weight, e.meanOfInteractions));
+		}
+		return ret ;
 	}
 	
 }

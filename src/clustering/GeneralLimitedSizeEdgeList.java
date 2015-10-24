@@ -1,5 +1,6 @@
 package clustering;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeSet;
 
@@ -8,6 +9,14 @@ public class GeneralLimitedSizeEdgeList {
 	private TreeSet<WeightedEdge> sortedSetOfEdges ;
 	private HashMap< Integer , HashMap <Integer , WeightedEdge > > pairToEdgeMap ; 
 	private int maxSize;
+	
+	public ArrayList<WeightedEdge> getEdges(){
+		ArrayList<WeightedEdge> ret = new ArrayList<>();
+		for(WeightedEdge e : sortedSetOfEdges){
+			ret.add(e);
+		}
+		return ret ;
+	}
 
 	public GeneralLimitedSizeEdgeList(int sz) {
 		maxSize = sz;
@@ -63,5 +72,6 @@ public class GeneralLimitedSizeEdgeList {
 	public boolean sizeConstraintViolated(){
 		return size() > getMaxSize();
 	}
+	
 	
 }

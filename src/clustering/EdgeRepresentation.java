@@ -12,4 +12,10 @@ public class EdgeRepresentation<T> {
 		weight = we ;
 		meanOfInteractions = me ;
 	}
+	
+	@Override
+	public String toString() {
+		return first + " " + second + " "  + weight +  " " + meanOfInteractions ;
+	}
+	
 }

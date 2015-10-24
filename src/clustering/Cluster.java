@@ -74,7 +74,7 @@ public class Cluster {
 	}
 	
 	public int size(){
-		return sortedEdgeList.size();
+		return nodesInCluster.size();
 	}
 	
 	public boolean isOversized(){

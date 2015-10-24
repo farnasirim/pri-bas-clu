@@ -44,11 +44,10 @@ public class GraphClusteringManager {
 	public void addEdge(WeightedEdge e) {
 		Node a = getNode(e.first);
 		Node b = getNode(e.second);
-		
+		a.getAssociatedCluster().addEdge(e);
 		if(a.getAssociatedCluster() != b.getAssociatedCluster()){
 			merge(a , b);
 		}
-		a.getAssociatedCluster().addEdge(e);
 	}
 
 	public void checkNode(Integer v) {

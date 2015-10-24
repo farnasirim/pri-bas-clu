@@ -8,7 +8,7 @@ public class Constants {
 		static{
 			MAIN_PRIORITY_LIST_SIZE = 10000 ;
 			RESERVE_PRIORITY_LIST_SIZE = 10000 ;
-			CLUSTER_SIZE = 40 ;
+			CLUSTER_SIZE = 2 ;
 		}
 	}
 	public static class Formulas{
