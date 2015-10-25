@@ -1,5 +1,6 @@
+data/*
+!data/datanozero.txt
 log/
-data/
 bin/
 *.class
 
