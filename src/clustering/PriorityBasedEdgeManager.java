@@ -70,9 +70,9 @@ public class PriorityBasedEdgeManager {
 	}
 	
 	private void handle(WeightedEdge e){
-		System.out.println("handling : " + e);
+//		System.out.println("handling : " + e);
 		if(mainList.hasEdge(e)){
-			System.out.println("in main");
+//			System.out.println("in main");
 			WeightedEdge previous = mainList.findEdge(e).getClone();
 			mainList.deleteEdge(e);
 			
@@ -86,7 +86,7 @@ public class PriorityBasedEdgeManager {
 			updateEdgeInCluster(previous , updated);
 		}
 		else if(reserveList.hasEdge(e)){
-			System.out.println("in reserve");
+//			System.out.println("in reserve");
 			WeightedEdge previous = reserveList.findEdge(e).getClone();
 			reserveList.deleteEdge(e);
 			
@@ -100,7 +100,7 @@ public class PriorityBasedEdgeManager {
 			edgeArrival(updated);
 		}
 		else{
-			System.out.println("in nothing");
+//			System.out.println("in nothing");
 			WeightedEdge edge = new WeightedEdge(e.first, e.second, 0.0 , 0.0);
 			edge.weight = 
 					Constants.Formulas.calWeight(edge.weight, getCurrentTimestamp(), e.weight, edge.meanOfInteractions);
@@ -110,7 +110,7 @@ public class PriorityBasedEdgeManager {
 			mainList.putEdge(edge);
 			edgeArrival(edge);
 		}
-		System.out.println();
+//		System.out.println();
 	}
 	
 	public void moveEdgeToReserve(WeightedEdge e){
@@ -152,7 +152,7 @@ public class PriorityBasedEdgeManager {
 	}
 	
 	public void evaluate(IncrementalGraph g){
-		System.out.println("time : " + getCurrentTimestamp());
+//		System.out.println("time : " + getCurrentTimestamp());
 		HashMap<Integer , HashSet<Integer> > hs = new HashMap<>();
 		for(WeightedEdge e : g.getList()){
 			if(!hs.containsKey(e.first)){
@@ -179,6 +179,7 @@ public class PriorityBasedEdgeManager {
 	
 	public <T> GraphRepresentation<T> getRepresentation(HashMap<Integer, T> map) {
 		GraphRepresentation<T> ret = getGraphManager().getRepresentation(map);
+		ret.setInverseMap(map);
 		for(WeightedEdge e : mainList.getEdges()){
 			ret.addToMainList(new EdgeRepresentation<T>(map.get(e.first), map.get(e.second), e.weight, e.meanOfInteractions));
 		}

@@ -6,9 +6,9 @@ public class Constants {
 		public static int RESERVE_PRIORITY_LIST_SIZE ;
 		public static int CLUSTER_SIZE;
 		static{
-			MAIN_PRIORITY_LIST_SIZE = 5 ;
-			RESERVE_PRIORITY_LIST_SIZE = 2 ;
-			CLUSTER_SIZE = 4 ;
+			MAIN_PRIORITY_LIST_SIZE = 10;
+			RESERVE_PRIORITY_LIST_SIZE = 10;
+			CLUSTER_SIZE = 20;
 		}
 	}
 	public static class Formulas{

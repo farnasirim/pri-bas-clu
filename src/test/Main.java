@@ -18,6 +18,7 @@ import clustering.WeightedEdgeWeightComparator;
 public class Main {
 	
 	private static String LOG_DIR = "log/";
+	private static String GUI_DIR = "GUI/";
 	
 	private static PrintStream createLogger() throws FileNotFoundException{
 		int now = 0 ;
@@ -26,6 +27,16 @@ public class Main {
 			now ++;
 		}
 		return new PrintStream(new File(logPrefix + now + ".txt"));
+	}
+	
+	private static PrintStream createGUIPrinter() throws FileNotFoundException{
+		int now = 0 ;
+		String logPrefix = GUI_DIR + "gui";
+		while(new File((String)logPrefix + now + ".txt").exists()){
+			now ++;
+		}
+		return new PrintStream(new File(logPrefix + now + ".txt"));
+		
 	}
 	
 	private static <T> void printMap(Graph<T> g){
@@ -109,7 +120,17 @@ public class Main {
 			printer.println();
 					
 		}
-		printMap(graph);
+//		printMap(graph);
+		PrintStream guiPrinter = null;
+		try {
+			guiPrinter = createGUIPrinter();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		guiPrinter.println(graph.getRepresentation().getGuiOutput());
+
+		guiPrinter.close() ;
 		printer.close();
 	}
 	
