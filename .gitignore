@@ -1,4 +1,3 @@
-GUI/
 data/*
 !data/datanozero.txt
 log/
