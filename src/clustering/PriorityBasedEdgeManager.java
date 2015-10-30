@@ -153,6 +153,16 @@ public class PriorityBasedEdgeManager {
 	
 	public void evaluate(IncrementalGraph g){
 //		System.out.println("time : " + getCurrentTimestamp());
+		if(g.getTimeStamp() != -1){
+//			System.out.println("time stamp set from " + getCurrentTimestamp() + " to " + g.getTimeStamp());
+			setCurrentTimestamp(g.getTimeStamp());
+		}
+//		System.out.println("time : " + getCurrentTimestamp());
+//		System.out.println("query : ");
+//		for(WeightedEdge e : g.getList()){
+//			System.out.println(e);
+//		}
+//		System.out.println();
 		HashMap<Integer , HashSet<Integer> > hs = new HashMap<>();
 		for(WeightedEdge e : g.getList()){
 			if(!hs.containsKey(e.first)){
@@ -172,7 +182,7 @@ public class PriorityBasedEdgeManager {
 		}
 		currentTime++ ;
 	}
-
+	
 	public GraphClusteringManager getGraphManager(){
 		return graphManager;
 	}

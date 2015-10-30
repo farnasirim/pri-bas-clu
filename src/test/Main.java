@@ -1,5 +1,7 @@
 package test;
 
+import io.NormalInput;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
@@ -133,6 +135,113 @@ public class Main {
 		guiPrinter.close() ;
 		printer.close();
 	}
+
+	public static void test2func(){
+		Graph graph = new Graph<String>();
+		graph.setInputter(new NormalInput<>("/home/colonelmo/Desktop/datasets/facebook/facebook.in"));
+		while(graph.hasNextInput()){
+			graph.readAndEvaluateInput();
+		}
+		
+		PrintWriter printer = null;
+		try {
+			printer = new PrintWriter(new File("log/facebook.txt"));
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		GraphRepresentation<String> rep= graph.getRepresentation();
+		printer.println("Main list :");
+		for(EdgeRepresentation<String> e: rep.getMainList()){
+			printer.println(e);
+		}
+		printer.println();
+		printer.println("Reserve list :");
+		for(EdgeRepresentation<String> e : rep.getReserveList()){
+			printer.println(e);
+		}
+		printer.println();
+		for(ClusterRepresentation<String> clu : rep.getClusters()){
+			printer.println("Nodes : ");
+			for(String nd : clu.getNodes()){
+				printer.print(nd + " ");
+			}
+			printer.println();
+			printer.println("Edges : ");
+			for(EdgeRepresentation<String> e : clu.getEdges()){
+				printer.println(e.first + " " + e.second +" " + e.meanOfInteractions +" " + e.weight);
+			}
+			printer.println();
+		}
+		printer.println();
+		printer.println("---------------------------------------------------------------------");
+		printer.println();
+		printer.close();
+	}
+
+	public static void testfunc3(){
+		Graph <String> graph = new Graph();
+//		Scanner inp = new Scanner(System.in);
+		Scanner inp = null;
+		try {
+			inp = new Scanner(new File("data/datanozero2.txt"));
+//			inp = new Scanner(new File("data/debug.txt"));
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		while(inp.hasNext()){
+			int n = inp.nextInt();	
+			if(n == -1)
+				break ;
+			
+			for(int i = 0 ;i <n ; i++){
+				String a , b;
+				double w;
+				a= inp.next() ;
+				b = inp.next() ;
+				w = inp.nextDouble() ;
+				graph.addEdge(a, b, w);
+			}
+			graph.evaluate();
+		}
+
+		PrintWriter printer = null;
+		try {
+			printer = new PrintWriter(new File("log/other.txt"));
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		GraphRepresentation<String> rep= graph.getRepresentation();
+		printer.println("Main list :");
+		for(EdgeRepresentation<String> e: rep.getMainList()){
+			printer.println(e);
+		}
+		printer.println();
+		printer.println("Reserve list :");
+		for(EdgeRepresentation<String> e : rep.getReserveList()){
+			printer.println(e);
+		}
+		printer.println();
+		for(ClusterRepresentation<String> clu : rep.getClusters()){
+			printer.println("Nodes : ");
+			for(String nd : clu.getNodes()){
+				printer.print(nd + " ");
+			}
+			printer.println();
+			printer.println("Edges : ");
+			for(EdgeRepresentation<String> e : clu.getEdges()){
+				printer.println(e.first + " " + e.second +" " + e.meanOfInteractions +" " + e.weight);
+			}
+			printer.println();
+		}
+		printer.println();
+		printer.println("---------------------------------------------------------------------");
+		printer.println();
+		printer.close();
+		
+	}
 	
 	public static void main(String[] args) {
 //		TreeSet<WeightedEdge> set = new TreeSet<WeightedEdge>(new WeightedEdgeWeightComparator()) ;
@@ -146,7 +255,9 @@ public class Main {
 //		if(1 == 1)
 //			return ;
 		
-		testFunc();
+		test2func();
+//		System.out.println("\n\n\n\n");
+//		testfunc3();
 		if(1 == 1)
 			return ;
 		
