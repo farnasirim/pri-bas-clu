@@ -255,9 +255,10 @@ public class Main {
 //		if(1 == 1)
 //			return ;
 		
-		test2func();
+//		test2func();
 //		System.out.println("\n\n\n\n");
 //		testfunc3();
+		testFunc();
 		if(1 == 1)
 			return ;
 		
