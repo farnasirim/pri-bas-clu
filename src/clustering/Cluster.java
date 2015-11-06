@@ -94,7 +94,7 @@ public class Cluster {
 		}
 		ArrayList<EdgeRepresentation<T>> tmp = new ArrayList<>() ;
 		for(WeightedEdge e : sortedEdgeList){
-			tmp.add(new EdgeRepresentation<T>(map.get(e.first), map.get(e.second), e.weight, e.meanOfInteractions));
+			tmp.add(new EdgeRepresentation<T>(map.get(e.getFirst()), map.get(e.getSecond()), e.getWeight(), e.getMean() , e.getTime() , e.getNewWeight()));
 		}
 		for(int i = tmp.size() - 1 ; i>= 0 ; i --){
 			ret.addEdge(tmp.get(i));

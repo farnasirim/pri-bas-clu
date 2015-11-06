@@ -28,28 +28,28 @@ public class GeneralLimitedSizeEdgeList {
 		if(!hasEdge(e)){
 			return null ;
 		}
-		return pairToEdgeMap.get(e.first).get(e.second);
+		return pairToEdgeMap.get(e.getFirst()).get(e.getSecond());
 	}
 
 	public boolean hasEdge(WeightedEdge e){
-		if(pairToEdgeMap.containsKey(e.first)){
-			return pairToEdgeMap.get(e.first).containsKey(e.second);
+		if(pairToEdgeMap.containsKey(e.getFirst())){
+			return pairToEdgeMap.get(e.getFirst()).containsKey(e.getSecond());
 		}
 		return false; 
 	}
 	
 	public void putEdge(WeightedEdge e){
-		if(!pairToEdgeMap.containsKey(e.first)){
-			pairToEdgeMap.put(e.first, new HashMap<>());
+		if(!pairToEdgeMap.containsKey(e.getFirst())){
+			pairToEdgeMap.put(e.getFirst(), new HashMap<>());
 		}
-		pairToEdgeMap.get(e.first).put(e.second, e);
+		pairToEdgeMap.get(e.getFirst()).put(e.getSecond(), e);
 //		System.out.println("putting " + e  + "in ");
 		sortedSetOfEdges.add(e);
 	}
 
 	public void deleteEdge(WeightedEdge e){
-		sortedSetOfEdges.remove(pairToEdgeMap.get(e.first).get(e.second));
-		pairToEdgeMap.get(e.first).remove(e.second);
+		sortedSetOfEdges.remove(pairToEdgeMap.get(e.getFirst()).get(e.getSecond()));
+		pairToEdgeMap.get(e.getFirst()).remove(e.getSecond());
 	}
 
 	public int size(){
@@ -57,7 +57,7 @@ public class GeneralLimitedSizeEdgeList {
 	}
 	
 	public void replaceEdge(WeightedEdge old, WeightedEdge neww){
-		pairToEdgeMap.get(old.first).replace(old.second, neww);
+		pairToEdgeMap.get(old.getFirst()).replace(old.getSecond(), neww);
 		sortedSetOfEdges.remove(old);
 		sortedSetOfEdges.add(neww);
 	}

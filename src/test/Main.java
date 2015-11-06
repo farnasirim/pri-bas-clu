@@ -120,6 +120,7 @@ public class Main {
 			printer.println();
 			printer.println("---------------------------------------------------------------------");
 			printer.println();
+			printer.flush();
 					
 		}
 //		printMap(graph);
