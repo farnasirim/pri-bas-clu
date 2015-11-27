@@ -36,7 +36,7 @@ public class GraphRepresentation <T>{
 	public void setInverseMap(HashMap<Integer , T> theMap){
 		map = theMap;
 	}
-	
+//	
 	public String getGuiOutput(){
 		StringBuilder sb = new StringBuilder();
 		HashSet<T> nodes = new HashSet<>() ;

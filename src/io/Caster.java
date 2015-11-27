@@ -5,6 +5,7 @@ public class Caster {
 //		System.out.println("casting : " + val);
 		if(a instanceof Integer){
 			return (T) Integer.valueOf(val);
+			
 		}
 		return (T) val;
 	}

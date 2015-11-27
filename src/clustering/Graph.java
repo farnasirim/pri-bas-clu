@@ -1,11 +1,10 @@
 package clustering;
 
-import help.NotImplementedYetException;
 import io.GenericDataStash;
 import io.GenericEdge;
 import io.NormalInput;
+import io.NormalOutput;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Graph<T>{
@@ -13,10 +12,12 @@ public class Graph<T>{
 	private HashMap<Integer , T> reverseHash ;
 	private PriorityBasedEdgeManager edgeManager ;
 	private IncrementalGraph graphToAdd ;
-	private NormalInput inp ;
+	private NormalInput <T> inp ;
+	private NormalOutput<T> logger;
+	
 	Integer nextVertexId  ;
 	
-	public void setInputter(NormalInput input){
+	public void setInputter(NormalInput <T>input){
 		inp = input ;
 	}
 	
@@ -88,6 +89,14 @@ public class Graph<T>{
 
 	public HashMap<Integer, T> getInverseMap() {
 		return reverseHash;
+	}
+
+	public void setOutputter(NormalOutput<T> normalOutput) {
+		logger = normalOutput;
+	}
+	
+	public void log(){
+		logger.log(getRepresentation());
 	}
 	
 }

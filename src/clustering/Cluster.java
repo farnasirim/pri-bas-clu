@@ -1,7 +1,6 @@
 package clustering;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.TreeSet;
@@ -20,7 +19,6 @@ public class Cluster {
 	
 	public void addEdge(WeightedEdge e){
 //		System.out.println(e);
-//		System.out.println("size bef : " + sortedEdgeList.size());
 		sortedEdgeList.add(e);
 //		System.out.println("size aft : " + sortedEdgeList.size());
 	}

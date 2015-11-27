@@ -47,4 +47,8 @@ public class NormalInput <T> {
 		return ret; 
 	}
 	
+	public void close(){
+		inp.close();	
+	}
+	
 }
