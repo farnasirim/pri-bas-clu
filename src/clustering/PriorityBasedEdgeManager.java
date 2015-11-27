@@ -47,11 +47,19 @@ public class PriorityBasedEdgeManager {
 			WeightedEdge previous = mainList.findEdge(e).getClone();
 			mainList.deleteEdge(e);
 			
-			WeightedEdge updated = new WeightedEdge(e.first, e.second, previous.weight , previous.meanOfInteractions);
-			updated.weight = 
-					Constants.Formulas.calWeight(updated.weight, getCurrentTimestamp(), e.weight, updated.meanOfInteractions);
-			updated.meanOfInteractions = 
-					Constants.Formulas.meanOfIntrac(getCurrentTimestamp(), e.weight, updated.meanOfInteractions);
+			WeightedEdge updated = 
+					new WeightedEdge(e.getFirst(), e.getSecond(), previous.getWeight(), previous.getMean() , previous.getTime());
+			
+			updated.setWeight(
+					Constants.Formulas.calWeight(updated.getWeight(), getCurrentTimestamp(), e.getWeight(), updated.getMean())
+					);
+			
+			updated.setMean( 
+					Constants.Formulas.meanOfIntrac(getCurrentTimestamp(), e.getWeight(), updated.getMean())
+					);
+			
+			updated.setTime(getCurrentTimestamp());
+			
 			mainList.putEdge(updated);
 			updateEdgeInCluster(previous, updated);
 		}
@@ -59,11 +67,14 @@ public class PriorityBasedEdgeManager {
 			WeightedEdge previous = reserveList.findEdge(e).getClone();
 			reserveList.deleteEdge(e);
 			
-			WeightedEdge updated = new WeightedEdge(e.first, e.second, previous.weight , previous.meanOfInteractions);
-			updated.weight = 
-					Constants.Formulas.calWeight(updated.weight, getCurrentTimestamp(), e.weight, updated.meanOfInteractions);
-			updated.meanOfInteractions = 
-					Constants.Formulas.meanOfIntrac(getCurrentTimestamp(), e.weight, updated.meanOfInteractions);
+			WeightedEdge updated = new WeightedEdge(e.getFirst(), e.getSecond(), previous.getWeight(), previous.getMean());
+			updated.setWeight(
+					Constants.Formulas.calWeight(updated.getWeight(), getCurrentTimestamp(), e.getWeight(), updated.getMean())
+					);
+			updated.setMean(
+					Constants.Formulas.meanOfIntrac(getCurrentTimestamp(), e.getWeight(), updated.getMean())
+					);
+			updated.setTime(getCurrentTimestamp());
 			
 			reserveList.putEdge(updated);
 		}
@@ -76,12 +87,16 @@ public class PriorityBasedEdgeManager {
 			WeightedEdge previous = mainList.findEdge(e).getClone();
 			mainList.deleteEdge(e);
 			
-			WeightedEdge updated = new WeightedEdge(e.first, e.second, previous.weight , previous.meanOfInteractions);
-			updated.weight = 
-					Constants.Formulas.calWeight(updated.weight, getCurrentTimestamp(), e.weight, updated.meanOfInteractions);
-			updated.meanOfInteractions = 
-					Constants.Formulas.meanOfIntrac(getCurrentTimestamp(), e.weight, updated.meanOfInteractions);
-
+			WeightedEdge updated = new WeightedEdge(e.getFirst(), e.getSecond(), previous.getWeight(), previous.getMean());
+			updated.setWeight(
+					Constants.Formulas.calWeight(updated.getWeight(), getCurrentTimestamp(), e.getWeight(), updated.getMean())
+					);
+			updated.setMean(
+					Constants.Formulas.meanOfIntrac(getCurrentTimestamp(), e.getWeight(), updated.getMean())
+					);
+			updated.setTime(getCurrentTimestamp());
+			
+			
 			mainList.putEdge(updated);
 			updateEdgeInCluster(previous , updated);
 		}
@@ -90,23 +105,29 @@ public class PriorityBasedEdgeManager {
 			WeightedEdge previous = reserveList.findEdge(e).getClone();
 			reserveList.deleteEdge(e);
 			
-			WeightedEdge updated = new WeightedEdge(e.first, e.second, previous.weight , previous.meanOfInteractions);
-			updated.weight = 
-					Constants.Formulas.calWeight(updated.weight, getCurrentTimestamp(), e.weight, updated.meanOfInteractions);
-			updated.meanOfInteractions = 
-					Constants.Formulas.meanOfIntrac(getCurrentTimestamp(), e.weight, updated.meanOfInteractions);
+			WeightedEdge updated = new WeightedEdge(e.getFirst(), e.getSecond(), previous.getWeight(), previous.getMean());
+			updated.setWeight(
+					Constants.Formulas.calWeight(updated.getWeight(), getCurrentTimestamp(), e.getWeight(), updated.getMean())
+					);
+			updated.setMean(
+					Constants.Formulas.meanOfIntrac(getCurrentTimestamp(), e.getWeight(), updated.getMean())
+					);
+			updated.setTime(getCurrentTimestamp());
 			
 			mainList.putEdge(updated);
 			edgeArrival(updated);
 		}
 		else{
 //			System.out.println("in nothing");
-			WeightedEdge edge = new WeightedEdge(e.first, e.second, 0.0 , 0.0);
-			edge.weight = 
-					Constants.Formulas.calWeight(edge.weight, getCurrentTimestamp(), e.weight, edge.meanOfInteractions);
-			edge.meanOfInteractions = 
-					Constants.Formulas.meanOfIntrac(getCurrentTimestamp(), e.weight, edge.meanOfInteractions);
-
+			WeightedEdge edge = new WeightedEdge(e.getFirst(), e.getSecond(), 0.0 , 0.0);
+			edge.setWeight(
+					Constants.Formulas.calWeight(edge.getWeight(), getCurrentTimestamp(), e.getWeight(), edge.getMean())
+					);
+			edge.setMean(
+					Constants.Formulas.meanOfIntrac(getCurrentTimestamp(), e.getWeight(), edge.getMean())
+					);
+			edge.setTime(getCurrentTimestamp());
+			
 			mainList.putEdge(edge);
 			edgeArrival(edge);
 		}
@@ -165,19 +186,20 @@ public class PriorityBasedEdgeManager {
 //		System.out.println();
 		HashMap<Integer , HashSet<Integer> > hs = new HashMap<>();
 		for(WeightedEdge e : g.getList()){
-			if(!hs.containsKey(e.first)){
-				hs.put(e.first, new HashSet<>());
+			e.setTime(getCurrentTimestamp());
+			if(!hs.containsKey(e.getFirst())){
+				hs.put(e.getFirst(), new HashSet<>());
 			}
-			hs.get(e.first).add(e.second);
-			checkNode(e.first);
-			checkNode(e.second);
+			hs.get(e.getFirst()).add(e.getSecond());
+			checkNode(e.getFirst());
+			checkNode(e.getSecond());
 			handle(e);
 			handlePriorityLists();
 		}
 		for(WeightedEdge e : getEdges()){
-			boolean already = hs.containsKey(e.first) && hs.get(e.first).contains(e.second) ;
+			boolean already = hs.containsKey(e.getFirst()) && hs.get(e.getFirst()).contains(e.getSecond()) ;
 			if(!already){
-				hardUpdate(new WeightedEdge(e.first , e.second , 0.0));
+				hardUpdate(new WeightedEdge(e.getFirst(), e.getSecond(), 0.0));
 			}
 		}
 		currentTime++ ;
@@ -191,10 +213,10 @@ public class PriorityBasedEdgeManager {
 		GraphRepresentation<T> ret = getGraphManager().getRepresentation(map);
 		ret.setInverseMap(map);
 		for(WeightedEdge e : mainList.getEdges()){
-			ret.addToMainList(new EdgeRepresentation<T>(map.get(e.first), map.get(e.second), e.weight, e.meanOfInteractions));
+			ret.addToMainList(new EdgeRepresentation<T>(map.get(e.getFirst()), map.get(e.getSecond()), e.getWeight(), e.getMean() , e.getTime() , e.getNewWeight()));
 		}
 		for(WeightedEdge e : reserveList.getEdges()){
-			ret.addToReserveList(new EdgeRepresentation<T>(map.get(e.first), map.get(e.second), e.weight, e.meanOfInteractions));
+			ret.addToReserveList(new EdgeRepresentation<T>(map.get(e.getFirst()), map.get(e.getSecond()), e.getWeight(), e.getMean() , e.getTime() , e.getNewWeight()));
 		}
 		return ret ;
 	}

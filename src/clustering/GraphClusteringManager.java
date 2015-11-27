@@ -1,6 +1,5 @@
 package clustering;
 
-import java.io.ObjectInputStream.GetField;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -18,7 +17,7 @@ public class GraphClusteringManager {
 	}
 	
 	private Cluster getAssociatedCluster(WeightedEdge e){
-		return getNode(e.first).getAssociatedCluster();
+		return getNode(e.getFirst()).getAssociatedCluster();
 	}
 	
 	private void merge(Node a, Node b){
@@ -42,8 +41,8 @@ public class GraphClusteringManager {
 	}
 
 	public void addEdge(WeightedEdge e) {
-		Node a = getNode(e.first);
-		Node b = getNode(e.second);
+		Node a = getNode(e.getFirst());
+		Node b = getNode(e.getSecond());
 		a.getAssociatedCluster().addEdge(e);
 //		if(e.first == 5 && e.second == 6){
 //			System.out.println("For " + e + " merging " + a.getNodeId() + " " + b.getNodeId());
