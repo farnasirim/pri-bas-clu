@@ -50,6 +50,8 @@ public class NormalOutput <T>{
 			logger.println();
 		}
 		logger.println();
+		logger.println("*************************************************************");
+		logger.println();
 	}
 	
 	public void close(){
