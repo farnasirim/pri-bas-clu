@@ -98,5 +98,11 @@ public class Graph<T>{
 	public void log(){
 		logger.log(getRepresentation());
 	}
+
+	public void close() {
+		logger.close();
+		inp.close();
+		
+	}
 	
 }

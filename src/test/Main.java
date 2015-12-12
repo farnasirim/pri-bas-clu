@@ -20,6 +20,7 @@ public class Main{
 				g.readAndEvaluateInput();
 				g.log();
 			}
+			g.close() ;
 	}
 
 }

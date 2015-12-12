@@ -37,6 +37,7 @@ public class NormalOutput <T>{
 			logger.println(e);
 		}
 		logger.println();
+		logger.println("Num clu : " + rep.getClusters().size());
 		for(ClusterRepresentation<T> clu : rep.getClusters()){
 			logger.println("Nodes : ");
 			for(T nd : clu.getNodes()){
@@ -55,6 +56,7 @@ public class NormalOutput <T>{
 	}
 	
 	public void close(){
+		logger.flush();
 		logger.close();
 	}
 	
