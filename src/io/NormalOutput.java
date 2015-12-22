@@ -26,6 +26,10 @@ public class NormalOutput <T>{
 		}
 	}
 	
+	public PrintWriter getLogger(){
+		return logger;
+	}
+	
 	public void log(GraphRepresentation<T> rep){
 		logger.println("Main list :");
 		for(EdgeRepresentation<T> e: rep.getMainList()){

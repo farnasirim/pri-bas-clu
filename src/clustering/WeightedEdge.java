@@ -9,7 +9,7 @@ public class WeightedEdge {
 	private Integer t ;
 	
 	public Double getNewWeight(){
-		return getWeight() + t*getMean();
+		return /*getWeight() +*/ t*getMean();
 	}
 	
 	public Integer getTime(){
