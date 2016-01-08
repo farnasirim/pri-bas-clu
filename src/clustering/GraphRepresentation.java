@@ -54,7 +54,7 @@ public class GraphRepresentation <T>{
 		sb.append(mainList.size());
 		sb.append("\n");
 		for(EdgeRepresentation<T> e : mainList){
-			sb.append(e.first + " " + e.second + " " + e.weight);
+			sb.append(e.first + " " + e.second + " " + e.newW);
 			sb.append("\n");
 		}
 		sb.append("\n");
