@@ -18,7 +18,8 @@ public class EdgeRepresentation<T> {
 	
 	@Override
 	public String toString() {
-		return first + " " + second + " "  + weight +  " " + meanOfInteractions + " " + t + " " +(weight + t*meanOfInteractions) ;
+		return first + " "  + second +  " "  + newW;
+		//		return first + " " + second + " "  + weight +  " " + meanOfInteractions + " " + t + " " +(weight + t*meanOfInteractions) ;
 	}
 	
 }

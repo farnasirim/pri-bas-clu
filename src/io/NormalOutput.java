@@ -50,7 +50,7 @@ public class NormalOutput <T>{
 			logger.println();
 			logger.println("Edges : ");
 			for(EdgeRepresentation<T> e : clu.getEdges()){
-				logger.println(e.first + " " + e.second +" " + e.meanOfInteractions +" " + e.weight);
+				logger.println(e.first + " " + e.second +" " + e.newW);
 			}
 			logger.println();
 		}
