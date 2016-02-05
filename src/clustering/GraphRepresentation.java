@@ -40,6 +40,17 @@ public class GraphRepresentation <T>{
 	public String getGuiOutput(){
 		StringBuilder sb = new StringBuilder();
 		HashSet<T> nodes = new HashSet<>() ;
+		HashMap<T , Integer> whichCluster = new HashMap<>();
+		
+		int clusterIndex = 0 ;
+		
+		for(ClusterRepresentation<T> cluster : clusters){
+			for(T node: cluster.getNodes()){
+				whichCluster.put(node, clusterIndex);
+			}
+			clusterIndex ++ ;
+		}
+		
 		for(EdgeRepresentation<T> e : mainList){
 			nodes.add(e.first);
 			nodes.add(e.second);
@@ -48,6 +59,8 @@ public class GraphRepresentation <T>{
 		sb.append("\n");
 		for(T e : nodes){
 			sb.append(e);
+			sb.append(" ");
+			sb.append(whichCluster.get(e));
 			sb.append("\n");
 		}
 		sb.append("\n");

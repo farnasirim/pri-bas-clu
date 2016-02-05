@@ -17,8 +17,8 @@ public class Main{
 					
 			Graph<String> g = new Graph<>();
 			g.setInputter(new NormalInput<>(INPUT_FILE_DIRECTORY + INPUT_FILE_NAME));
-			g.setOutputter(new NormalOutput<>(LOG_FILE_DIRECTORY , INPUT_FILE_NAME));
-//			g.setOutputter(new GraphicOutput<>(GUI_FILE_DIRECTORY , INPUT_FILE_NAME));
+//			g.setOutputter(new NormalOutput<>(LOG_FILE_DIRECTORY , INPUT_FILE_NAME));
+			g.setOutputter(new GraphicOutput<>(GUI_FILE_DIRECTORY , INPUT_FILE_NAME));
 			while(g.hasNextInput()){
 				g.readAndEvaluateInput();
 //				g.log();
