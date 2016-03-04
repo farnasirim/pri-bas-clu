@@ -7,6 +7,7 @@ import java.util.HashSet;
 public class GraphRepresentation <T>{
 	private ArrayList<ClusterRepresentation<T> > clusters; 
 	private HashMap<Integer , T> map;
+	public int numDel;
 	private ArrayList<EdgeRepresentation<T>> mainList , reserveList;
 	
 	public void addToMainList(EdgeRepresentation<T> e){
@@ -55,6 +56,7 @@ public class GraphRepresentation <T>{
 			nodes.add(e.first);
 			nodes.add(e.second);
 		}
+		sb.append("num of permanently deleted (from reserve) edges : " + numDel + "\n"); 
 		sb.append(nodes.size());
 		sb.append("\n");
 		for(T e : nodes){

@@ -84,7 +84,9 @@ public class Graph<T>{
 	}
 
 	public GraphRepresentation<T> getRepresentation(){
-		return edgeManager.getRepresentation(reverseHash) ;
+		GraphRepresentation<T> ret = edgeManager.getRepresentation(reverseHash) ;
+		ret.numDel = getNumDel();
+		return ret;
 	}
 
 	public HashMap<Integer, T> getInverseMap() {
@@ -103,6 +105,10 @@ public class Graph<T>{
 		logger.close();
 		inp.close();
 		
+	}
+	
+	public int getNumDel(){
+		return edgeManager.getNumDel();
 	}
 	
 }

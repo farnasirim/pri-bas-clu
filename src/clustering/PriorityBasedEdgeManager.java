@@ -221,4 +221,8 @@ public class PriorityBasedEdgeManager {
 		return ret ;
 	}
 	
+	public int getNumDel(){
+		return reserveList.getNumDel();
+	}
+	
 }
