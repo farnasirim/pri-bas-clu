@@ -9,11 +9,7 @@ public class GeneralLimitedSizeEdgeList {
 	private TreeSet<WeightedEdge> sortedSetOfEdges ;
 	private HashMap< Integer , HashMap <Integer , WeightedEdge > > pairToEdgeMap ; 
 	private int maxSize;
-	private int numDel = 0;
 	
-	public int getNumDel(){
-		return numDel;
-	}
 	
 	
 	public ArrayList<WeightedEdge> getEdges(){
@@ -54,7 +50,6 @@ public class GeneralLimitedSizeEdgeList {
 	}
 
 	public void deleteEdge(WeightedEdge e){
-		numDel ++;
 		sortedSetOfEdges.remove(pairToEdgeMap.get(e.getFirst()).get(e.getSecond()));
 		pairToEdgeMap.get(e.getFirst()).remove(e.getSecond());
 	}

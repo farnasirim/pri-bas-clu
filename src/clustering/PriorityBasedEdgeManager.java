@@ -11,7 +11,7 @@ public class PriorityBasedEdgeManager {
 	private GeneralLimitedSizeEdgeList reserveList ;
 	
 	private GraphClusteringManager graphManager; 
-	
+	private int numDel= 0;
 	private int currentTime ;
 
 	public PriorityBasedEdgeManager() {
@@ -149,6 +149,7 @@ public class PriorityBasedEdgeManager {
 		while(reserveList.sizeConstraintViolated()){
 			WeightedEdge w = reserveList.getLowestWeight();
 			reserveList.deleteEdge(w);
+			numDel++;
 		}
 	}
 	
@@ -222,7 +223,7 @@ public class PriorityBasedEdgeManager {
 	}
 	
 	public int getNumDel(){
-		return reserveList.getNumDel();
+		return numDel;
 	}
 	
 }
